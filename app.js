@@ -9,8 +9,6 @@ var	express 		= require("express"),
 	LocalStrategy	= require("passport-local"),
 	methodOverride	= require("method-override"),
 	User			= require("./models/user"),
-	session			= require("express-session"),
-	MongoStore 		= require('connect-mongo')(session),
 	seedDB			= require("./seeds");
 
 // Requiring routes
@@ -41,11 +39,13 @@ app.use(flash());
 app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
-app.use(session({
+app.use(express.session({
 	secret: "It's whatever.",
 	resave: false,
 	saveUninitialized: false,
-	store: new MongoStore()
+	store: new (require("express-sessions"))({
+        storage: 'mongodb',
+    })
 }));
 
 app.use(passport.initialize());
