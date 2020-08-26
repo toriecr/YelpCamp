@@ -9,7 +9,8 @@ var	express 		= require("express"),
 	LocalStrategy	= require("passport-local"),
 	methodOverride	= require("method-override"),
 	User			= require("./models/user"),
-	seedDB			= require("./seeds");
+	seedDB			= require("./seeds"),
+	session 		= require("express-session");
 
 // Requiring routes
 var commentRoutes 		= require("./routes/comments"),
@@ -39,7 +40,7 @@ app.use(flash());
 app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
-app.use(express.session({
+app.use(session({
 	secret: "It's whatever.",
 	resave: false,
 	saveUninitialized: false,
