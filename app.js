@@ -9,6 +9,8 @@ var	express 		= require("express"),
 	LocalStrategy	= require("passport-local"),
 	methodOverride	= require("method-override"),
 	User			= require("./models/user"),
+	session			= require("express-session"),
+	MongoStore 		= require('connect-mongo')(session),
 	seedDB			= require("./seeds");
 
 // Requiring routes
@@ -16,7 +18,7 @@ var commentRoutes 		= require("./routes/comments"),
 	campgroundRoutes 	= require("./routes/campgrounds"),
 	indexRoutes 		= require("./routes/index");
 
-//seedDB(); //seed database
+seedDB(); //seed database
 
 mongoose.connect("mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority", 
 	{ 
@@ -39,10 +41,11 @@ app.use(flash());
 app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
-app.use(require("express-session")({
+app.use(session({
 	secret: "It's whatever.",
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: false,
+	store: new MongoStore(options)
 }));
 
 app.use(passport.initialize());
