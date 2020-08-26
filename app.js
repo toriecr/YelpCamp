@@ -21,7 +21,7 @@ seedDB(); //seed database
 
 mongoose.connect("mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority", 
 	{ 
-		useMongoClient: true,
+		useMongoClient: true, 
 		useNewUrlParser: true, 
 		useUnifiedTopology: true,
 		useCreateIndex: true
