@@ -6,7 +6,7 @@ var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 
-router.get("/", async (req, res){
+router.get("/", async function(req, res){
 	res.render("landing");
 });
 
