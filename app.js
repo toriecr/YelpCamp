@@ -21,7 +21,7 @@ seedDB(); //seed database
 
 const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
 
-mongoose.connect(url, 
+mongoose.connect(url,
 	{ 
 		useMongoClient: true, 
 		useNewUrlParser: true, 
