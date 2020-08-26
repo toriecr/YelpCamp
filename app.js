@@ -45,7 +45,7 @@ app.use(session({
 	secret: "It's whatever.",
 	resave: false,
 	saveUninitialized: false,
-	store: new MongoStore(options)
+	store: new MongoStore()
 }));
 
 app.use(passport.initialize());
