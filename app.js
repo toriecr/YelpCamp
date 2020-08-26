@@ -19,18 +19,20 @@ var commentRoutes 		= require("./routes/comments"),
 
 seedDB(); //seed database
 
-// mongoose.connect("mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority", 
-// 	{ 
-// 		useMongoClient: true, 
-// 		useNewUrlParser: true, 
-// 		useUnifiedTopology: true,
-// 		useCreateIndex: true
-// 	}
-// ).then(() => {
-// 	console.log("Connected to DB!");
-// }).catch(err => {
-// 	console.log("ERROR: ", err.message);
-// });
+const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
+
+mongoose.connect(url, 
+	{ 
+		useMongoClient: true, 
+		useNewUrlParser: true, 
+		useUnifiedTopology: true,
+		useCreateIndex: true
+	}
+).then(() => {
+	console.log("Connected to DB!");
+}).catch(err => {
+	console.log("ERROR: ", err.message);
+});
 
 
 // const MongoClient = require('mongodb').MongoClient;
@@ -43,29 +45,29 @@ seedDB(); //seed database
 // });
 
 
-const { MongoClient } = require("mongodb");
+// const { MongoClient } = require("mongodb");
  
-// Replace the following with your Atlas connection string                                                                                                                                        
+// // Replace the following with your Atlas connection string                                                                                                                                        
 
-const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
-console.log(process.env.DATABASEURL);
+// const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+// console.log(process.env.DATABASEURL);
 
-const client = new MongoClient(url);
+// const client = new MongoClient(url, {useUnifiedTopology: true});
 
-async function run() {
-    try {
-        await client.connect();
-        console.log("Connected correctly to server");
+// async function run() {
+//     try {
+//         await client.connect();
+//         console.log("Connected correctly to server");
 
-    } catch (err) {
-        console.log(err.stack);
-    }
-    finally {
-        await client.close();
-    }
-}
+//     } catch (err) {
+//         console.log(err.stack);
+//     }
+//     finally {
+//         await client.close();
+//     }
+// }
 
-run().catch(console.dir);
+// run().catch(console.dir);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
