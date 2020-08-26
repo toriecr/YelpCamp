@@ -19,6 +19,8 @@ var commentRoutes 		= require("./routes/comments"),
 
 seedDB(); //seed database
 
+const port = process.env.PORT || 3000;
+
 const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 console.log("url is: " + url); 
 
@@ -59,6 +61,7 @@ async function run() {
         console.log("Connected correctly to server");
 
     } catch (err) {
+		console.log("You've reached an irritating error");
         console.log(err.stack);
     }
     finally {
@@ -105,6 +108,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, proce.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
 	console.log("YelpCamp Server has started");
 });
