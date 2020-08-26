@@ -35,7 +35,7 @@ seedDB(); //seed database
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useCreateIndex: true });
+const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
   // perform actions on the collection object
