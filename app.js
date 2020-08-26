@@ -19,18 +19,29 @@ var commentRoutes 		= require("./routes/comments"),
 
 seedDB(); //seed database
 
-mongoose.connect("mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority", 
-	{ 
-		useMongoClient: true, 
-		useNewUrlParser: true, 
-		useUnifiedTopology: true,
-		useCreateIndex: true
-	}
-).then(() => {
-	console.log("Connected to DB!");
-}).catch(err => {
-	console.log("ERROR: ", err.message);
+// mongoose.connect("mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority", 
+// 	{ 
+// 		useMongoClient: true, 
+// 		useNewUrlParser: true, 
+// 		useUnifiedTopology: true,
+// 		useCreateIndex: true
+// 	}
+// ).then(() => {
+// 	console.log("Connected to DB!");
+// }).catch(err => {
+// 	console.log("ERROR: ", err.message);
+// });
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useCreateIndex: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
 });
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
