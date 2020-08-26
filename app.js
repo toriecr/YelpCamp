@@ -33,15 +33,38 @@ seedDB(); //seed database
 // });
 
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
 
+
+const { MongoClient } = require("mongodb");
+ 
+// Replace the following with your Atlas connection string                                                                                                                                        
+
+const url = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority";
+
+const client = new MongoClient(url);
+
+async function run() {
+    try {
+        await client.connect();
+        console.log("Connected correctly to server");
+
+    } catch (err) {
+        console.log(err.stack);
+    }
+    finally {
+        await client.close();
+    }
+}
+
+run().catch(console.dir);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
