@@ -47,7 +47,8 @@ const { MongoClient } = require("mongodb");
  
 // Replace the following with your Atlas connection string                                                                                                                                        
 
-const url = "mongodb+srv://firstuser:firstuserpassword@cluster0.fgio0.mongodb.net/<dbname>?retryWrites=true&w=majority?authSource=admin";
+const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+console.log(process.env.DATABASEURL);
 
 const client = new MongoClient(url);
 
@@ -103,6 +104,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
 	console.log("YelpCamp Server has started");
 });
