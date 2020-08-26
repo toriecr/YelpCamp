@@ -20,7 +20,7 @@ var commentRoutes 		= require("./routes/comments"),
 seedDB(); //seed database
 
 const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
-console.log(process.env.DATABASEURL); 
+console.log("url is: " + url); 
 
 mongoose.connect(url,
 	{ 
@@ -32,6 +32,7 @@ mongoose.connect(url,
 ).then(() => {
 	console.log("Connected to DB!");
 }).catch(err => {
+	console.log("MADE IT HERE");
 	console.log("ERROR: ", err.message);
 });
 
