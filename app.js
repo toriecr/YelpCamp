@@ -10,7 +10,8 @@ var	express 		= require("express"),
 	methodOverride	= require("method-override"),
 	User			= require("./models/user"),
 	seedDB			= require("./seeds"),
-	session 		= require("express-session");
+	session 		= require("express-session"),
+	MongoStore 		= require('connect-mongo')(session);
 
 // Requiring routes
 var commentRoutes 		= require("./routes/comments"),
@@ -22,7 +23,7 @@ seedDB(); //seed database
 const port = process.env.PORT || 3000;
 // const ip = process.env.IP || "0.0.0.0/0";
 
-const url = process.env.MONGODB_URI || "mongodb://localhost/yelp_camp";
+const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 console.log("url is: " + url); 
 
 mongoose.connect(url,
@@ -85,9 +86,9 @@ app.use(session({
 	secret: "It's whatever.",
 	resave: false,
 	saveUninitialized: false,
-	store: new (require("express-sessions"))({
-        storage: 'mongodb',
-    })
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection 
+	})
 }));
 
 app.use(passport.initialize());
