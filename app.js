@@ -22,7 +22,7 @@ seedDB(); //seed database
 const port = process.env.PORT || 3000;
 // const ip = process.env.IP || "0.0.0.0/0";
 
-const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+const url = process.env.MONGODB_URI || "mongodb://localhost/yelp_camp";
 console.log("url is: " + url); 
 
 mongoose.connect(url,
