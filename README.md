@@ -14,4 +14,4 @@ YelpCamp is based off of Yelp.com, but for campgrounds. Authentication and autho
  - MongoDB
  - Heroku for deployment
 
-> Written with [StackEdit](https://stackedit.io/).
+Dependencies can be found in the package.json file.
